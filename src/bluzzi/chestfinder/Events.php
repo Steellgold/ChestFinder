@@ -6,7 +6,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\item\Item;
-use pocketmine\item\LegacyStringToItemParser;
+use pocketmine\item\StringToItemParser;
 use pocketmine\player\Player;
 use bluzzi\chestfinder\task\ChestFinder;
 
@@ -29,8 +29,7 @@ class Events implements Listener {
 	 * @return void
 	 */
 	private function checkAndStart(Player $player, Item $itemHeld) : void {
-		// I use LegacyStringToItemParser instead of StringToItemParser because, the option of before (StringToItemParser) takes only with the minecraft: or _ character, while the Legacy version with the ID:META
-		$item = LegacyStringToItemParser::getInstance()->parse(Main::getDefaultConfig()->get("id"));
+		$item = StringToItemParser::getInstance()->parse(Main::getDefaultConfig()->get("id"));
 		$name = $player->getName();
 
 		if($itemHeld->equals($item, true, false)){
